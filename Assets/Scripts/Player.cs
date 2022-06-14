@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    int score;
+
     public float JumpForce;
 
     Rigidbody myRigi;
@@ -18,7 +18,6 @@ public class Player : MonoBehaviour
         isJumpPressed = false;
         gameOver = false;
 
-        score = 0;
         //JumpForce = 5.0f;
         Physics.gravity = new Vector3(0, -15.0f, 0);
     }
@@ -56,6 +55,14 @@ public class Player : MonoBehaviour
         {
             gameOver = true;
             Debug.LogWarning("GameOver");
+        }
+    }
+    private void OnTriggerExit(Collider collision)
+    {
+        if (collision.tag == "Finish")
+        {
+            UIManager.AddScore();
+            //Debug.Log($"score:{UIManager._score}");
         }
     }
 }
